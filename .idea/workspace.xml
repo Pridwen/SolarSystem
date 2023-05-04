@@ -1,7 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cbfdf753-71c9-4a15-80b7-2a8d21639284" name="Changes" comment="" />
+    <list default="true" id="cbfdf753-71c9-4a15-80b7-2a8d21639284" name="Changes" comment="Yeppers">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Puppet.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/Project/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/Project/MainFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/Project/Puppet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/Project/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/Project/Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/TextureClasses/BitmapLoader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/TextureClasses/ResourceRetriever.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/TextureClasses/TextureHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/TextureClasses/TextureReader$Texture.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/TextureClasses/TextureReader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/Textures/Earth.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/Textures/Jupiter.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/Textures/mars_1k_color.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/Textures/mercurymap.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/Textures/tx_0_0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/Textures/tx_15_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/Textures/venusmap.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project/Planet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Planet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project/Puppet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TextureClasses/BitmapLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/BitmapLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TextureClasses/ResourceRetriever.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/ResourceRetriever.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TextureClasses/TextureHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/TextureHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TextureClasses/TextureReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/TextureReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Textures/Earth.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Textures/Jupiter.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Textures/JupiterTex.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Textures/mars_1k_color.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Textures/mercurymap.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Textures/neptune_current.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Textures/NeptuneTex.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Textures/preview_sun.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Textures/saturn.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Textures/SaturnTex.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Textures/starfield.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Textures/StarsTex.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Textures/tx_0_0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Textures/tx_15_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Textures/uranuscyl1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Textures/UranusTex.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Textures/venusmap.jpg" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,23 +52,31 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/Project/MainFrame.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2On0LVmgDS965pkmJ20wORy2Upg" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Asus/Desktop/Year 3 BS/Sem 2 BS/GUI/Solar System/src&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/Asus/Desktop/Year 3 BS/Sem 2 BS/GUI/Solar System/src/Textures"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Asus\Desktop\Year 3 BS\Sem 2 BS\GUI\Solar System\src\Textures" />
       <recent name="C:\Users\Asus\Desktop\Year 3 BS\Sem 2 BS\GUI\Solar System\src" />
       <recent name="C:\Users\Asus\Desktop\Year 3 BS\Anul 3\Grafica Interfete Utilizator\untitled" />
     </key>
@@ -84,6 +130,29 @@
       <option name="presentableId" value="Default" />
       <updated>1682180984483</updated>
     </task>
+    <task id="LOCAL-00001" summary="Yeppers">
+      <created>1682445401528</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1682445401528</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Yeppers" />
+    <option name="LAST_COMMIT_MESSAGE" value="Yeppers" />
   </component>
 </project>

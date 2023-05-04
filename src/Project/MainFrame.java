@@ -40,18 +40,18 @@ public class MainFrame extends GLCanvas implements GLEventListener, KeyListener 
 		this.addKeyListener(this);												// get key binds
 		FPSAnimator animator = new FPSAnimator(this, 60);            // get animator
 		animator.start();
-		String MercuryTex = "src/Textures/mercurymap.jpg";							// get textures
-		String VenusTex = "src/Textures/venusmap.jpg";
-		String EarthTex = "src/Textures/EarthTex.png";
-		String MarsTex = "src/Textures/mars_1k_color.jpg";
-		String JupiterTex = "src/Textures/Jupiter.jpg";
-		String SaturnTex = "src/Textures/saturn.jpg";
-		String UranusTex = "src/Textures/uranuscyl1.jpg";
-		String NeptuneTex = "src/Textures/neptune_current.jpg";
+		String MercuryTex = "src/Textures/MercuryTex.png";							// get textures
+		String VenusTex   = "src/Textures/VenusTex.png";
+		String EarthTex   = "src/Textures/EarthTex.png";
+		String MarsTex    = "src/Textures/MarsTex.png";
+		String JupiterTex = "src/Textures/JupiterTex.jpg";
+		String SaturnTex  = "src/Textures/SaturnTex.jpg";
+		String UranusTex  = "src/Textures/UranusTex.jpg";
+		String NeptuneTex = "src/Textures/NeptuneTex.jpg";
 
-			// create the planets
-			// speed and radius were taken from https://nssdc.gsfc.nasa.gov/planetary/factsheet/
-			// considering the speed of Earth is 29.8 km/s, did ratio conversion for the rest
+		// create the planets
+		// speed and radius were taken from https://nssdc.gsfc.nasa.gov/planetary/factsheet/
+		// considering the speed of Earth is 29.8 km/s, did ratio conversion for the rest
 
 		Planet Mercury = new Planet(gl, glu, getObjectTexture(gl, MercuryTex), 0.588f, SUN_RADIUS + 2f, 2.56f, "Mercury");
 		Planet Venus = new Planet(gl, glu, getObjectTexture(gl, VenusTex), 0.435f, SUN_RADIUS + 12f, 3.56f, "Venus");
@@ -71,23 +71,35 @@ public class MainFrame extends GLCanvas implements GLEventListener, KeyListener 
 		planets.add(Uranus);
 		planets.add(Neptune);
 
-		String StarlightTex = "src/Textures/starfield.png";
+		String StarlightTex = "src/Textures/StarsTex.png";
 		stars = getObjectTexture(gl, StarlightTex);
 
-		String SunTex = "src/Textures/preview_sun.jpg";
+		String SunTex = "src/Textures/SunTex.png";
 		this.sun = new Sun(gl, glu, getObjectTexture(gl, SunTex), "Sun");
 	}
 
 	@Override
 	public void display(GLAutoDrawable glAutoDrawable) {
 		final GL2 gl = glAutoDrawable.getGL().getGL2();
-		setCamera(gl, 300);
+		gl.glMatrixMode(GL2.GL_PROJECTION);
+		gl.glLoadIdentity();
+		float widthHeightRatio = (float) getWidth() / (float) getHeight();
+		glu.gluPerspective(45, widthHeightRatio, 1, 1000);
+		glu.gluLookAt(0, 0, 200, 0, 0, 0, 0, 1, 0);
+		gl.glMatrixMode(GL2.GL_MODELVIEW);
+		gl.glLoadIdentity();
 		aimCamera(gl, glu);
 		moveCamera();
-		setLights(gl);
+		float SHINE_ALL_DIRECTIONS = 1;
+		float[] lightPos = { 0, 0, 0, SHINE_ALL_DIRECTIONS };
+		float[] lightColorAmbient = { 0.5f, 0.5f, 0.5f, 1f };
+		float[] lightColorSpecular = { 0.8f, 0.8f, 0.8f, 1f };
+		gl.glLightfv(GL2.GL_LIGHT1, GL2.GL_POSITION, lightPos, 0);
+		gl.glLightfv(GL2.GL_LIGHT1, GL2.GL_AMBIENT, lightColorAmbient, 0);
+		gl.glLightfv(GL2.GL_LIGHT1, GL2.GL_SPECULAR, lightColorSpecular, 0);
+		gl.glEnable(GL2.GL_LIGHT1);
+		gl.glEnable(GL2.GL_LIGHTING);
 		gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
-		stars.bind(gl);
-		stars.enable(gl);
 		drawStarSky(gl);
 		sun.display();
 		for (Planet p : planets)
@@ -106,34 +118,13 @@ public class MainFrame extends GLCanvas implements GLEventListener, KeyListener 
 		}
 		return tex;
 	}
-	private void setLights(GL2 gl) {
-		float SHINE_ALL_DIRECTIONS = 1;
-		float[] lightPos = { 0, 0, 0, SHINE_ALL_DIRECTIONS };
-		float[] lightColorAmbient = { 0.5f, 0.5f, 0.5f, 1f };
-		float[] lightColorSpecular = { 0.8f, 0.8f, 0.8f, 1f };
-		gl.glLightfv(GL2.GL_LIGHT1, GL2.GL_POSITION, lightPos, 0);
-		gl.glLightfv(GL2.GL_LIGHT1, GL2.GL_AMBIENT, lightColorAmbient, 0);
-		gl.glLightfv(GL2.GL_LIGHT1, GL2.GL_SPECULAR, lightColorSpecular, 0);
-		gl.glEnable(GL2.GL_LIGHT1);
-		gl.glEnable(GL2.GL_LIGHTING);
-
-	}
-	private void setCamera(GL2 gl, float distance) {
-		gl.glMatrixMode(GL2.GL_PROJECTION);
-		gl.glLoadIdentity();
-		float widthHeightRatio = (float) getWidth() / (float) getHeight();
-		glu.gluPerspective(45, widthHeightRatio, 1, 1000);
-		glu.gluLookAt(0, 0, distance, 0, 0, 0, 0, 1, 0);
-		gl.glMatrixMode(GL2.GL_MODELVIEW);
-		gl.glLoadIdentity();
-	}
 	private void drawStarSky(GL gl) {
+		final float radius = 200f;
+		final int slices = 32;
+		final int stacks = 32;
 		stars.enable(gl);
 		stars.bind(gl);
 		((GLPointerFunc) gl).glDisableClientState(GL2.GL_VERTEX_ARRAY);
-		final float radius = 150f;
-		final int slices = 16;
-		final int stacks = 16;
 		gl.glEnable(GL.GL_BLEND);
 		gl.glBlendFunc(GL.GL_SRC_COLOR, GL.GL_DST_ALPHA);
 		GLUquadric sky = glu.gluNewQuadric();

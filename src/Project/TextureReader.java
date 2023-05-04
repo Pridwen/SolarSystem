@@ -1,4 +1,4 @@
-package TextureClasses;
+package Project;
 
 import com.jogamp.common.nio.Buffers;
 

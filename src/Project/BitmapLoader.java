@@ -1,4 +1,4 @@
-package TextureClasses;
+package Project;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;

@@ -1,4 +1,4 @@
-package TextureClasses;
+package Project;
 
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;

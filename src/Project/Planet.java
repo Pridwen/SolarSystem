@@ -35,8 +35,8 @@ public class Planet {
 		final float x = (float) Math.sin(Math.toRadians(angle)) * distance;
 		final float y = (float) Math.cos(Math.toRadians(angle)) * distance;
 		final float z = 0;
-		gl.glTranslatef(x, y, z);	//move pointers at the coords
-		draw();						//draw the object
+		gl.glTranslatef(x, y, z);											//move pointers at the coords
+		draw();																//draw the object
 		gl.glPopMatrix();
 
 	}
