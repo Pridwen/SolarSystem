@@ -6,6 +6,7 @@ import com.jogamp.opengl.fixedfunc.GLPointerFunc;
 import com.jogamp.opengl.glu.GLU;
 import com.jogamp.opengl.glu.GLUquadric;
 import com.jogamp.opengl.util.FPSAnimator;
+import com.jogamp.opengl.util.gl2.GLUT;
 import com.jogamp.opengl.util.texture.Texture;
 import com.jogamp.opengl.util.texture.TextureData;
 import com.jogamp.opengl.util.texture.TextureIO;
@@ -17,6 +18,12 @@ import java.util.ArrayList;
 public class MainFrame extends GLCanvas implements GLEventListener, KeyListener {
 	private static final float SUN_RADIUS = 12f;
 	private GLU glu;
+	private float MoonAngle = 0;
+	private float EarthAngle = 0;
+	private float SystemAngle = 0;
+	private Texture earth;
+	private Texture clouds;
+	private Texture moon;
 	private Texture stars;
 	private ArrayList<Planet> planets;
 	private Sun sun;
@@ -49,13 +56,16 @@ public class MainFrame extends GLCanvas implements GLEventListener, KeyListener 
 		String UranusTex  = "src/Textures/UranusTex.jpg";
 		String NeptuneTex = "src/Textures/NeptuneTex.jpg";
 
+		String CloudTex = "src/Textures/CloudTex.png";
+		String MoonTex = "src/Textures/MoonTex.png";
+
 		// create the planets
 		// speed and radius were taken from https://nssdc.gsfc.nasa.gov/planetary/factsheet/
 		// considering the speed of Earth is 29.8 km/s, did ratio conversion for the rest
 
 		Planet Mercury = new Planet(gl, glu, getObjectTexture(gl, MercuryTex), 0.588f, SUN_RADIUS + 2f, 2.56f, "Mercury");
 		Planet Venus = new Planet(gl, glu, getObjectTexture(gl, VenusTex), 0.435f, SUN_RADIUS + 12f, 3.56f, "Venus");
-		Planet Earth = new Planet(gl, glu, getObjectTexture(gl, EarthTex), 0.37f, SUN_RADIUS + 32f, 6.335f, "Earth");
+		//Planet Earth = new Planet(gl, glu, getObjectTexture(gl, EarthTex), 0.37f, SUN_RADIUS + 32f, 6.335f, "Earth");
 		Planet Mars = new Planet(gl, glu, getObjectTexture(gl, MarsTex), 0.3f, SUN_RADIUS + 50f, 3.56f, "Mars");
 		Planet Jupiter = new Planet(gl, glu, getObjectTexture(gl, JupiterTex), 0.162f, SUN_RADIUS + 65f, 8.56f, "Jupiter");
 		Planet Saturn = new Planet(gl, glu, getObjectTexture(gl, SaturnTex), 0.3f, SUN_RADIUS + 90f, 7.56f, "Saturn");
@@ -64,7 +74,7 @@ public class MainFrame extends GLCanvas implements GLEventListener, KeyListener 
 
 		planets.add(Mercury);
 		planets.add(Venus);
-		planets.add(Earth);
+		//planets.add(Earth);
 		planets.add(Mars);
 		planets.add(Jupiter);
 		planets.add(Saturn);
@@ -73,6 +83,9 @@ public class MainFrame extends GLCanvas implements GLEventListener, KeyListener 
 
 		String StarlightTex = "src/Textures/StarsTex.png";
 		stars = getObjectTexture(gl, StarlightTex);
+		earth = getObjectTexture(gl, EarthTex);
+		clouds = getObjectTexture(gl, CloudTex);
+		moon = getObjectTexture(gl, MoonTex);
 
 		String SunTex = "src/Textures/SunTex.png";
 		this.sun = new Sun(gl, glu, getObjectTexture(gl, SunTex), "Sun");
@@ -104,6 +117,86 @@ public class MainFrame extends GLCanvas implements GLEventListener, KeyListener 
 		sun.display();
 		for (Planet p : planets)
 			p.display();
+		final float distance = SUN_RADIUS + 30f;
+		final float x = (float) Math.sin(Math.toRadians(SystemAngle)) * distance;
+		final float y = (float) Math.cos(Math.toRadians(SystemAngle)) * distance;
+		final float z = 0;
+		gl.glTranslatef(x, y, z);
+		drawEarth(gl);
+		drawMoon(gl);
+		gl.glPopMatrix();
+	}
+	private void drawEarth(GL2 gl) {
+		float[] rgba = { 1f, 1f, 1f };
+		final float radius = 6.378f;
+		final int slices = 16;
+		final int stacks = 16;
+		final String name = "Earth";
+		final GLUT glut = new GLUT();
+		gl.glMaterialfv(GL2.GL_FRONT, GL2.GL_AMBIENT, rgba, 0);
+		gl.glMaterialf(GL2.GL_FRONT, GL2.GL_SHININESS, 0.5f);
+		gl.glPushName(4);
+
+		EarthAngle = (EarthAngle + 0.1f) % 360f;
+
+		clouds.enable(gl);
+		clouds.bind(gl);
+		gl.glPushMatrix();
+		gl.glRotatef(EarthAngle, 0.2f, 0.1f, 0);
+
+		gl.glEnable(GL.GL_BLEND);
+		gl.glBlendFunc(GL.GL_SRC_COLOR, GL.GL_DST_ALPHA);
+		GLUquadric clouds = glu.gluNewQuadric();
+		glu.gluQuadricOrientation(clouds, GLU.GLU_OUTSIDE);
+		glu.gluQuadricTexture(clouds, true);
+		glu.gluSphere(clouds, 7, slices, stacks);
+
+		earth.enable(gl);
+		earth.bind(gl);
+		gl.glDisable(GL.GL_BLEND);
+
+		GLUquadric earth = glu.gluNewQuadric();
+		glu.gluQuadricTexture(earth, true);
+		glu.gluQuadricDrawStyle(earth, GLU.GLU_FILL);
+		glu.gluSphere(earth, radius, slices, stacks);
+		gl.glRasterPos3f(0, radius, 0);								// observe the position will move with the planet
+		// unlike the sun which is stationary
+		glut.glutBitmapString(GLUT.BITMAP_HELVETICA_18, name);				// Render the text message using GLUT
+		gl.glPopName();
+
+		glu.gluDeleteQuadric(earth);
+		glu.gluDeleteQuadric(clouds);
+		gl.glPopMatrix();
+	}
+
+	private void drawMoon(GL2 gl) {
+		gl.glPushMatrix();
+		final float distance = 12.000f;
+		final float x = (float) Math.sin(Math.toRadians(MoonAngle)) * distance;
+		final int y = (int) ((float) Math.cos(Math.toRadians(MoonAngle)) * distance);
+		final float z = 0;
+		final float radius = 3.378f;
+		final int slices = 16;
+		final int stacks = 16;
+		final String name = "Moon";
+		final GLUT glut = new GLUT();
+		moon.enable(gl);
+		moon.bind(gl);
+		gl.glPushName(5);
+		MoonAngle = (MoonAngle + 1f) % 360f;
+		gl.glTranslatef(x, y, z);
+		gl.glRotatef(MoonAngle, 0, 0, -1);
+		gl.glRotatef(45f, 0, 1, 0);
+
+		GLUquadric moon = glu.gluNewQuadric();
+		glu.gluQuadricTexture(moon, true);
+		glu.gluQuadricDrawStyle(moon, GLU.GLU_FILL);
+		glu.gluSphere(moon, radius, slices, stacks);
+		gl.glRasterPos3f(0, radius, 0);								// observe the position will move with the planet
+		// unlike the sun which is stationary
+		glut.glutBitmapString(GLUT.BITMAP_HELVETICA_18, name);				// Render the text message using GLUT
+		gl.glPopMatrix();
+		gl.glPopName();
 	}
 	private Texture getObjectTexture(GL2 gl, String fileName) {
 		InputStream stream;
