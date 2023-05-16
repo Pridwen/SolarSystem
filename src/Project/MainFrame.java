@@ -117,6 +117,7 @@ public class MainFrame extends GLCanvas implements GLEventListener, KeyListener 
 		sun.display();
 		for (Planet p : planets)
 			p.display();
+		SystemAngle = (SystemAngle + 0.4f) % 360f;
 		final float distance = SUN_RADIUS + 30f;
 		final float x = (float) Math.sin(Math.toRadians(SystemAngle)) * distance;
 		final float y = (float) Math.cos(Math.toRadians(SystemAngle)) * distance;
@@ -223,8 +224,6 @@ public class MainFrame extends GLCanvas implements GLEventListener, KeyListener 
 		GLUquadric sky = glu.gluNewQuadric();
 		glu.gluQuadricTexture(sky, true);
 		glu.gluQuadricDrawStyle(sky, GLU.GLU_FILL);
-		glu.gluQuadricNormals(sky, GLU.GLU_FLAT);
-		glu.gluQuadricOrientation(sky, GLU.GLU_INSIDE);
 		glu.gluSphere(sky, radius, slices, stacks);
 		gl.glEnable(GL.GL_BLEND);
 		gl.glBlendFunc(GL.GL_SRC_COLOR, GL.GL_DST_ALPHA);
